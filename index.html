@@ -1,0 +1,206 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--LINK TO STYLESHEETS-->
+    <link rel="stylesheet" href="./styling.css">
+    <link rel="stylesheet" href="./responsive.css">
+
+    <!--LINK(S) TO GOOGLE FONT(S)-->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body onload="disableCompBtn();getNewBG()" style="background-size: cover;">
+    <div id="game-container">
+        <h1>Human, please select something to throw:</h1>
+        <div id="user-buttons">
+            <button id="rock" onclick="userChoiceRock();disableUserBtns()">rock</button>
+            <button id="paper" onclick="userChoicePaper();disableUserBtns()">paper</button>
+            <button id="scissors" onclick="userChoiceScissors();disableUserBtns()">scissors</button>
+            <button id="randomize" onclick="randomizeUserChoice();disableUserBtns()">Decide for me</button>
+        </div>
+        <h2>The human throws: <span id="display-user-choice"></span></h2>
+        <button id="comp-btn" onclick="getCompChoice();disableCompBtn();getResult()">See what the machine selects!</button>
+        <h2>The machine throws: <span id="display-comp-choice"></span></h2>
+        <p id="display-result"></p>
+        <button id="reset-btn" onclick="window.location.href=window.location.href">Reset Game</button>
+    </div>
+    <script>
+        // FUNCTION TO DISABLE COMPUTER SELECTION BUTTON
+        const disableCompBtn = () => {
+            document.getElementById('comp-btn').disabled = true;
+        }
+        
+        // FUNCTION TO DISABLE USER BUTTONS & ENABLE COMP SELECTION BUTTON
+        const disableUserBtns = () => {
+            document.getElementById('rock').disabled = true;
+            document.getElementById('paper').disabled = true;
+            document.getElementById('scissors').disabled = true;
+            document.getElementById('randomize').disabled = true;
+            document.getElementById('comp-btn').disabled = false;
+        }
+        // USER CHOICE
+        let userChoice = '';
+        const userChoiceRock = () => {
+            document.getElementById('display-user-choice').innerHTML = 'ROCK';
+            userChoice = 'rock';
+        }
+
+        const userChoicePaper = () => {
+            document.getElementById('display-user-choice').innerHTML = 'PAPER';
+            userChoice = 'paper';
+        }
+
+        const userChoiceScissors = () => {
+            document.getElementById('display-user-choice').innerHTML = 'SCISSORS';
+            userChoice = 'scissors';
+        }
+
+        const randomizeUserChoice = () => {
+            let randNum = Math.floor(Math.random() * 5);
+            switch(randNum) {
+                case 0:
+                    document.getElementById('display-user-choice').innerHTML = 'ROCK';
+                    userChoice = 'rock';
+                    break;
+                case 1:
+                    document.getElementById('display-user-choice').innerHTML = 'PAPER';
+                    userChoice = 'paper';
+                    break;
+                case 2:
+                    document.getElementById('display-user-choice').innerHTML = 'SCISSORS';
+                    userChoice = 'scissors';
+                    break;
+                case 3:
+                    document.getElementById('display-user-choice').innerHTML = 'BOMB';
+                    userChoice = 'bomb';
+                    break;
+                case 4:
+                    document.getElementById('display-user-choice').innerHTML = 'SUICIDE BOMB';
+                    userChoice = 'suicide bomb';
+                    break; 
+            }
+            return userChoice;
+        }
+
+        // COMPUTER CHOICE
+        let compChoice = '';
+        const getCompChoice = () => {
+            let randNum = Math.floor(Math.random() * 3);
+            switch(randNum) {
+                case 0:
+                    document.getElementById('display-comp-choice').innerHTML = 'ROCK';
+                    compChoice = 'rock';
+                    console.log(compChoice);
+                    break;
+                case 1:
+                    document.getElementById('display-comp-choice').innerHTML = 'PAPER';
+                    compChoice = 'paper';
+                    console.log(compChoice);
+                    break;
+                case 2:
+                    document.getElementById('display-comp-choice').innerHTML = 'SCISSORS';
+                    compChoice = 'scissors';
+                    console.log(compChoice);
+                    break;
+            }
+            return compChoice;
+        }
+
+        // GET & REPORT RESULT
+        const getResult = () => {
+            // If a tie:
+            if (userChoice === compChoice) {
+                return document.getElementById('display-result').innerHTML = "It's a tie!";
+            }
+
+            // If user throws rock:
+            if (userChoice === 'rock') {
+                if (compChoice === 'paper') {
+                    return document.getElementById('display-result').innerHTML = 'The machine wins!';
+                } else {
+                    return document.getElementById('display-result').innerHTML = 'The human wins!';                    
+                }
+            }
+
+            // If user throws paper:
+            if (userChoice === 'paper') {
+                if (compChoice === 'scissors') {
+                    return document.getElementById('display-result').innerHTML = 'The machine wins!';
+                } else {
+                    return document.getElementById('display-result').innerHTML = 'The human wins!';                    
+                }
+            }
+
+            // If user throws scissors:
+            if (userChoice === 'scissors') {
+                if (compChoice === 'rock') {
+                    return document.getElementById('display-result').innerHTML = 'The machine wins!';
+                } else {
+                    return document.getElementById('display-result').innerHTML = 'The human wins!';                    
+                }
+            }
+
+            // If user throws bomb:
+            if (userChoice === 'bomb') {
+                return document.getElementById('display-result').innerHTML = 'The human wins in a blowout!';
+            }
+
+            // If user throws suicide bomb:
+            if (userChoice === 'suicide bomb') {
+                return document.getElementById('display-result').innerHTML = 'The machine wins in a blowout!';
+            }
+        }
+
+        // FUNCTION TO RESET BACKGROUND UPON GAME RESET
+        const getNewBG = () => {
+            let randImg = Math.floor(Math.random() * 10);
+            switch(randImg) {
+                case 0:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg1.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 1:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg2.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 2:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg3.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 3:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg4.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 4:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg5.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 5:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg6.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 6:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg7.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 7:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg8.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 8:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg9.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+                case 9:
+                    document.body.style.backgroundImage = 'url(' + './assets/bg10.jpg' + ')';
+                    document.body.style.backgroundSize = 'cover';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

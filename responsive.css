@@ -1,0 +1,40 @@
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 23px;
+    }
+
+    #user-buttons button {
+        height: 65px;
+        width: 65px;
+        font-size: 10px;
+    }
+
+    #comp-btn {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #game-container {
+        width: 67%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    #user-buttons button {
+        height: 31px;
+        width: 65px;
+        font-size: 10px;
+        margin-right: 5px;
+    }
+
+    #comp-btn {
+        font-size: 13px;
+    }
+}
