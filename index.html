@@ -89,7 +89,7 @@
         // COMPUTER CHOICE
         let compChoice = '';
         const getCompChoice = () => {
-            let randNum = Math.floor(Math.random() * 3);
+            let randNum = Math.floor(Math.random() * 5);
             switch(randNum) {
                 case 0:
                     document.getElementById('display-comp-choice').innerHTML = 'ROCK';
@@ -106,6 +106,16 @@
                     compChoice = 'scissors';
                     console.log(compChoice);
                     break;
+                case 3:
+                    document.getElementById('display-comp-choice').innerHTML = 'BOMB';
+                    compChoice = 'bomb';
+                    console.log(compChoice);
+                    break;
+                case 4:
+                    document.getElementById('display-comp-choice').innerHTML = 'SUICIDE BOMB';
+                    compChoice = 'suicide bomb';
+                    console.log(compChoice);
+                    break;
             }
             return compChoice;
         }
@@ -113,15 +123,21 @@
         // GET & REPORT RESULT
         const getResult = () => {
             // If a tie:
-            if (userChoice === compChoice) {
+            if (userChoice === compChoice && (userChoice === 'bomb' || userChoice === 'suicide bomb')) {
+                return document.getElementById('display-result').innerHTML = "That's too many bombs; everyone dies!";
+            } else if (userChoice === compChoice) {
                 return document.getElementById('display-result').innerHTML = "It's a tie!";
+            } else if (userChoice === 'bomb' && compChoice === 'suicide bomb') {
+                return document.getElementById('display-result').innerHTML = "That's too many bombs; everyone dies!";
+            } else if (userChoice === 'suicide bomb' && compChoice === 'bomb') {
+                return document.getElementById('display-result').innerHTML = "That's too many bombs; everyone dies!";
             }
 
             // If user throws rock:
             if (userChoice === 'rock') {
                 if (compChoice === 'paper') {
                     return document.getElementById('display-result').innerHTML = 'The machine wins!';
-                } else {
+                } else if (compChoice === 'scissors') {
                     return document.getElementById('display-result').innerHTML = 'The human wins!';                    
                 }
             }
@@ -130,7 +146,7 @@
             if (userChoice === 'paper') {
                 if (compChoice === 'scissors') {
                     return document.getElementById('display-result').innerHTML = 'The machine wins!';
-                } else {
+                } else if (compChoice === 'rock') {
                     return document.getElementById('display-result').innerHTML = 'The human wins!';                    
                 }
             }
@@ -139,7 +155,7 @@
             if (userChoice === 'scissors') {
                 if (compChoice === 'rock') {
                     return document.getElementById('display-result').innerHTML = 'The machine wins!';
-                } else {
+                } else if (compChoice === 'paper') {
                     return document.getElementById('display-result').innerHTML = 'The human wins!';                    
                 }
             }
@@ -152,6 +168,16 @@
             // If user throws suicide bomb:
             if (userChoice === 'suicide bomb') {
                 return document.getElementById('display-result').innerHTML = 'The machine wins in a blowout!';
+            }
+
+            // If computer throws bomb:
+            if (compChoice === 'bomb') {
+                return document.getElementById('display-result').innerHTML = 'The machine wins in a blowout!';
+            }
+
+            // If computer throws suicide bomb:
+            if (compChoice === 'suicide bomb') {
+                return document.getElementById('display-result').innerHTML = 'The human wins in a blowout!';
             }
         }
 
