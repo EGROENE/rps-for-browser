@@ -62,8 +62,6 @@ button {
 
 #comp-btn:hover {
     cursor: pointer;
-    color: rgb(190, 10, 190);
-    background-color: white;
 }
 
 #reset-btn {
