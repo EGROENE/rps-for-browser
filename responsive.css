@@ -17,6 +17,7 @@
 @media screen and (max-width: 425px) {
     #game-container {
         width: 67%;
+        padding: 18px
     }
 
     h1 {
@@ -27,14 +28,29 @@
         font-size: 16px;
     }
 
+    #user-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 12px;
+        justify-items: center;
+    }
+
     #user-buttons button {
-        height: 31px;
+        height: 60px;
         width: 65px;
         font-size: 10px;
-        margin-right: 5px;
     }
 
     #comp-btn {
         font-size: 13px;
+    }
+
+    #display-result {
+        font-size: 26px;
+        margin: 5px 0 5px 0;
+    }
+
+    #reset-btn {
+        margin-top: 10px;
     }
 }
